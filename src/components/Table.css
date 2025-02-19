@@ -1,0 +1,15 @@
+/* Custom scrollbar (WebKit-based browsers) */
+.table-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #abe4ed;
+  border-radius: 0.5rem;
+}
