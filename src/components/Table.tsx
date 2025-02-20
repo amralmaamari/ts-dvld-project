@@ -1,17 +1,12 @@
 import React, { JSX, ReactNode } from "react";
 import "./Table.css";
+import { IColumn } from "../interfaces/constant";
 
-interface ICoulmn{
-  header:string,
-  accessor:string,
-  className?:string,
 
-}
 interface ITableProps<T>{
-  columns:ICoulmn[];
+  columns:IColumn[];
   data:T[];
   renderRow:(row:T)=>ReactNode;
-
 
 }
 export default function Table<T>({ columns, renderRow, data }:ITableProps<T>):JSX.Element {
