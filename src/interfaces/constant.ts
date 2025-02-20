@@ -16,3 +16,11 @@
   success:boolean,
   data: object[];
   }
+
+  export enum EnType {
+    Create = "Create",
+    Update = "Update",
+    Delete = "Delete",
+    View = "View",
+    Close = "Close",
+  }

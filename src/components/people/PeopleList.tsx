@@ -5,7 +5,9 @@ import ViewModel from "../../models/ViewModel";
 import CtrlPersonCard from "../people/controls/CtrlPerosnCard";
 // import GenericList from "../List/GenericList";
 import { IPerson } from "../../data/people";
-import { IColumn,IDataResponse,ISearchOptions } from "../../interfaces/constant";
+import { EnType, IColumn,IDataResponse,ISearchOptions } from "../../interfaces/constant";
+import GenericList from "../List/GenericList";
+import FormModal from "../../models/FormModal";
 
 
 
@@ -80,12 +82,13 @@ function PeopleList():JSX.Element {
         <td className="py-2 px-6">{row.Phone}</td>
         <td className="hidden md:table-cell py-2 px-6">{row.Email}</td>
         <td className="flex w-[200px] align-middle gap-2 h-full">
-          <FormModal Tablename="People" Type="Update" Id={row.PersonID} />
-          <FormModal Tablename="People" Type="Delete" Id={row.PersonID} />
+          <FormModal tablename="People" type={EnType.Update} id={row.PersonID} />
+          <FormModal tablename="People" type={EnType.Delete} id={row.PersonID} />
           <ViewModel
-            viewModelEnabled={true}
-            type="View"
-            Form={<CtrlPersonCard personId={row.PersonID} />}
+          enableShowBtn={true}
+          modelEnabledClick={true}
+            type={EnType.View}
+            form={<CtrlPersonCard personID={row.PersonID} />}
           />
           
         </td>
@@ -95,7 +98,15 @@ function PeopleList():JSX.Element {
 
   return (
     <>
-      <h2>Here is people list</h2>
+      <GenericList
+        title="People List"
+        tableName="People"
+        createModalType={EnType.Create}
+        columns={columns}
+        searchOptions={searchOptions}
+        renderRow={renderRow}
+        fetchDataFn={fetchDataFn}
+      />
     </>
   );
 }
