@@ -11,3 +11,8 @@
     options?:IColumn[],
   
   }
+
+  export interface IDataResponse{
+  success:boolean,
+  data: object[];
+  }

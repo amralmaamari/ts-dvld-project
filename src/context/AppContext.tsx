@@ -8,7 +8,7 @@ interface IAppContext {
   error: string | null;
   api: {
     people: {
-      fetchAll: () => Promise<IPerson[]>;
+      fetchAll: () => Promise<IPeopleResponse>;
       fetchById: (id: number) => Promise<IPerson>;
       create: (data: IPerson) => Promise<IPerson>;
       update: (id: number, data: IPerson) => Promise<IPerson>;
@@ -53,9 +53,9 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({ children }) =>
         //   handleApiCall<IPeopleResponse>(peopleApi.fetchAll, page, pageSize).then(
         //     (data) => data.people
         //   ),
-        fetchAll: (): Promise<IPerson[]> =>
+        fetchAll: (): Promise<IPeopleResponse> =>
           handleApiCall<IPeopleResponse>(peopleApi.fetchAll).then(
-            (data) => data.people
+            (data) => data
           ),
         fetchById: (id: number): Promise<IPerson> =>
           handleApiCall<IPersonResponse>(peopleApi.fetchById, id).then(

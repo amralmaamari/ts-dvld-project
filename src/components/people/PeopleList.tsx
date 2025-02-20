@@ -1,21 +1,18 @@
 import { JSX, useCallback, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import FormModal from "../Models/FormModal";
-import ViewModel from "../Models/ViewModel";
-import CtrlPersonCard from "./Controls/CtrlPersonCard";
-import GenericList from "../List/GenericList";
+// import FormModal from "../Models/FormModal";
+import ViewModel from "../../models/ViewModel";
+import CtrlPersonCard from "../people/controls/CtrlPerosnCard";
+// import GenericList from "../List/GenericList";
 import { IPerson } from "../../data/people";
-import { IColumn,ISearchOptions } from "../../interfaces/constant";
+import { IColumn,IDataResponse,ISearchOptions } from "../../interfaces/constant";
 
 
-interface  IFetchDataResult {
-  success: boolean;
-  data: IPerson[];
-}
+
 function PeopleList():JSX.Element {
   const { api } = useContext(AppContext);
 
-  const fetchDataFn = useCallback(async ():Promise<IFetchDataResult> => {
+  const fetchDataFn = useCallback(async ():Promise<IDataResponse> => {
     try {
       const result = await api.people.fetchAll();
       console.log("API Response:", result);
@@ -98,15 +95,7 @@ function PeopleList():JSX.Element {
 
   return (
     <>
-      <GenericList
-        title="People List"
-        tableName="People"
-        createModalType="Create"
-        columns={columns}
-        searchOptions={searchOptions}
-        renderRow={renderRow}
-        fetchDataFn={fetchDataFn}
-      />
+      <h2>Here is people list</h2>
     </>
   );
 }

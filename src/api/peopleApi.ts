@@ -4,7 +4,7 @@ import { IPerson } from "../data/people";
 
 
 export interface IPersonResponse {
-  success: string;
+  success: boolean;
   person: IPerson;
 }
 export interface IPeopleResponse {
@@ -13,7 +13,7 @@ export interface IPeopleResponse {
 }
 
 export interface DeleteResponse {
-  success: string;
+  success: boolean;
 }
 const peopleApi = {
   //   fetchAll: (page, pageSize) =>
