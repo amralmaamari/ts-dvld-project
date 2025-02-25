@@ -4,7 +4,7 @@ import { AppContext } from "../../context/AppContext";
 import ViewModel from "../../models/ViewModel";
 import CtrlPersonCard from "../people/controls/CtrlPerosnCard";
 // import GenericList from "../List/GenericList";
-import { IPerson } from "../../data/people";
+import { Ipeople, IPerson } from "../../data/people";
 import { EnType, IColumn,IDataResponse,ISearchOptions } from "../../interfaces/constant";
 import GenericList from "../List/GenericList";
 import FormModal from "../../models/FormModal";
@@ -98,7 +98,7 @@ function PeopleList():JSX.Element {
 
   return (
     <>
-      <GenericList
+      <GenericList<IPerson>
         title="People List"
         tableName="People"
         createModalType={EnType.Create}

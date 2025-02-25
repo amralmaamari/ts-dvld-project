@@ -1,0 +1,139 @@
+[
+  {
+    "title": "Home",
+    "icon": "home32",
+    "path": "/"
+  },
+    {
+      "title": "Applications",
+      "icon": "Applications", 
+      "children": [
+        {
+          "title": "Driving License Services",
+          "icon": "DriverLicense32",
+          "children": [
+            {
+              "title": "New Driving License",
+              "icon": "NewDrivingLicense32",
+              "children": [
+                {
+                  "title": "Local License",
+                  "icon": "Local32",
+                  "path": "/applications/dl/new/local"
+                },
+                {
+                  "title": "International License",
+                  "icon": "International32",
+                  "path": "/applications/dl/new/international"
+                }
+              ]
+            },
+            {
+              "title": "Renew Driving License",
+              "icon": "RenewDrivingLicense32",
+              "path": "/applications/dl/renew"
+            },
+            {
+              "title": "Replacement for Lost or Damaged License",
+              "icon": "LostDrivingLicense32",
+              "path": "/applications/dl/replacement"
+            },
+            {
+              "title": "Release Detained Driving License",
+              "icon": "ReleaseDetainedLicense32",
+              "path": "/applications/dl/release-detained"
+            },
+            {
+              "title": "Retake Driving Test",
+              "icon": "RetakeTest32",
+              "path": "/applications/dl/retake-test"
+            }
+          ]
+        },
+        {
+          "title": "Manage Application Types",
+          "icon": "ApplicationType",
+          "path": "/applications/manage-types"
+        },
+        {
+          "title": "Manage Test Types",
+          "icon": "TestType32",
+          "path": "/applications/manage-test-types"
+        },
+        {
+          "title": "Manage Applications",
+          "icon": "ManageApplications32",
+          "children": [
+            {
+              "title": "Local Driving License Applications",
+              "icon": "Local32",
+              "path": "/applications/manage/local"
+            },
+            {
+              "title": "International Driving License Applications",
+              "icon": "International32",
+              "path": "/applications/manage/international"
+            }
+          ]
+        },
+        {
+          "title": "Detain Licenses",
+          "icon": "Detain32",
+          "children": [
+            {
+              "title": "Manage Detained Licenses",
+              "icon": "DetainedDrivingLicense32",
+              "path": "/applications/detain/manage"
+            },
+            {
+              "title": "Detain License",
+              "icon": "Detain32",
+              "path": "/applications/detain/add"
+            },
+            {
+              "title": "Release Detained License",
+              "icon": "ReleaseDetainedLicense32",
+              "path": "/applications/detain/release"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Persons",
+      "icon": "Person32",
+      "path": "/people/list"
+    },
+    {
+      "title": "Drivers",
+      "icon": "DriverLicense32",
+      "path": "/drivers"
+    },
+    {
+      "title": "Users",
+      "icon": "User322",
+      "path": "/users"
+    },
+    {
+      "title": "Account Settings",
+      "icon": "accountsettings64", 
+      "children": [
+        {
+          "title": "Account Details",
+          "icon": "account-circle",
+          "path": "/account/details"
+        },
+        {
+          "title": "Edit Account",
+          "icon": "edit32",
+          "path": "/account/edit"
+        },
+        {
+          "title": "Sign Out",
+          "icon": "SignOut32",
+          "path": "/logout"
+        }
+      ]
+    }
+  ]
+  

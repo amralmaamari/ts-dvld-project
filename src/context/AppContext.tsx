@@ -1,6 +1,8 @@
 import React, { createContext, useState, useMemo, ReactNode } from "react";
 import peopleApi, { IPersonResponse, IPeopleResponse, DeleteResponse } from "../api/peopleApi";
 import { IPerson } from "../data/people";
+import { ItestTypesResponse } from "../data/testTypes";
+import testTypeApi, { ITestTypeResponses } from "../api/testTypesApi";
 
 // Define the shape of our Context
 interface IAppContext {
@@ -13,8 +15,12 @@ interface IAppContext {
       create: (data: IPerson) => Promise<IPerson>;
       update: (id: number, data: IPerson) => Promise<IPerson>;
       delete: (id: number) => Promise<DeleteResponse>;
-    };
+    },
+    testTypes: {
+      fetchAll: () => Promise<ITestTypeResponses>;
+    }
   };
+  
 }
 
 // Provider props
@@ -72,6 +78,12 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({ children }) =>
         delete: (id: number): Promise<DeleteResponse> =>
           handleApiCall<DeleteResponse>(peopleApi.delete, id),
       },
+      testTypes: {
+        fetchAll: (): Promise<ItestTypesResponse> =>
+          handleApiCall<ItestTypesResponse>(testTypeApi.fetchAll).then(
+            (data) => data
+          ),
+      }
     }),
     []
   );

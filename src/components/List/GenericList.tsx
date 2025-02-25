@@ -5,19 +5,17 @@ import FormModal from "../../models/FormModal";
 import { AppContext } from "../../context/AppContext";
 import { EnType, IColumn, IDataResponse, ISearchOptions } from "../../interfaces/constant";
 import Pagination from "../Pagination";
-import { IPerson } from "../../data/people";
-
-interface IGenericListProps{
+interface IGenericListProps<T>{
   title:string,
   tableName:string,
   showAddButton?:boolean,
   createModalType:EnType,
   columns:IColumn[],
   searchOptions?:ISearchOptions[],
-  renderRow:(row:IPerson)=>JSX.Element|null,
+  renderRow:(row: T)=>JSX.Element|null,
   fetchDataFn:()=>Promise<IDataResponse>,
 }
-function GenericList({
+function GenericList<T>({
   title,
   tableName,
   showAddButton=true,
@@ -26,7 +24,7 @@ function GenericList({
   searchOptions,
   renderRow,
   fetchDataFn,
-}:IGenericListProps):JSX.Element {
+}:IGenericListProps<T>):JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [recordsPerPage] = useState<number>(10);
   const { loading, error } = useContext(AppContext);

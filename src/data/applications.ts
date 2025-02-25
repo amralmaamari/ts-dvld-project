@@ -1,4 +1,4 @@
-export interface Iapplication {
+export interface IApplication {
     ApplicationID: number;
     ApplicationDate: string;
     ApplicationStatus: number;
@@ -10,12 +10,12 @@ export interface Iapplication {
     PersonID: number;
 }
 
-export interface IapplicationResponse {
+export interface IApplicationResponse {
     success:boolean,
-    applications:Iapplication[],
+    applications:IApplication[],
 }
 
-export const Applications:IapplicationResponse = {
+export const Applications:IApplicationResponse = {
     // 20250216173737
     // https://run.mocky.io/v3/b86f0447-fb27-4c03-8e65-ed71574c03f0
   

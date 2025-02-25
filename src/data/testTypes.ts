@@ -1,4 +1,4 @@
-export interface ITestTypes {
+export interface ITestTypeRow {
     TestTypeID: number;
     TestTypeTitle: string;
     TestTypeDescription: string;
@@ -7,7 +7,7 @@ export interface ITestTypes {
 
 export interface ItestTypesResponse {
     success:boolean,
-    testTypes:ITestTypes[],
+    testTypes:ITestTypeRow[],
 }
 export const TestTypes:ItestTypesResponse = {
     // 20250217162204

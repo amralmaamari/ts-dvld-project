@@ -24,3 +24,8 @@
     View = "View",
     Close = "Close",
   }
+
+  export interface IContextMenu{
+    key:string,
+    name:string,
+  }
