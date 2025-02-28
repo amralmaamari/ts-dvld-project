@@ -52,7 +52,7 @@ export default function ViewModel({
 
       {open && (
         <div className="w-screen h-screen fixed top-0 left-0 z-10 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="relative w-[70%] h-[80%] overflow-auto md:w-[60%] xl:w-[50%] bg-white p-3 rounded-md">
+          <div className="relative w-[70%] h-[80%] overflow-auto md:w-[60%]  bg-white p-3 rounded-md">
             <button
               className="p-1 bg-red-500 w-fit cursor-pointer rounded-full absolute top-1 right-1"
               onClick={handleClose}

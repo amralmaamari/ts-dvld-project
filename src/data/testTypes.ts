@@ -5,11 +5,11 @@ export interface ITestTypeRow {
     TestTypeFees: number;
 }
 
-export interface ItestTypesResponse {
+export interface ITestTypesResponses {
     success:boolean,
     testTypes:ITestTypeRow[],
 }
-export const TestTypes:ItestTypesResponse = {
+export const TestTypesData:ITestTypesResponses = {
     // 20250217162204
     // https://run.mocky.io/v3/017f0f97-80e3-4bb5-ba9a-0c2f211ce187
   

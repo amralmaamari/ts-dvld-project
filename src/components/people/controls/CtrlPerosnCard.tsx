@@ -38,7 +38,7 @@ export default function CtrlPersonCard({
   personID,
   nationalNo,
   selectedPersonInfo,
-  showTitle=false,
+  showTitle=true,
 }: ICtrlPersonCardProps): JSX.Element {
   const [selectedPerson, setSelectedPerson] = useState<IPerson | null>(null);
   const DEFAULT_VALUE = "[????]";

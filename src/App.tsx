@@ -7,6 +7,8 @@ import PeopleList from './components/people/PeopleList'
 import ShowPersonInfo from './components/people/ShowPersonInfo';
 import Sidebar from './components/sidebar/Sidebar';
 import ListTestTypes from './components/tests/testTypes/ListTestTypes';
+import ListApplicationTypes from './components/applications/application types/ListApplicationTypes';
+import ListLocalDrivingLicenseApplications from './components/local driving license application/ListLocalDrivingLicenseApplications';
 
 function App() {
 
@@ -14,6 +16,7 @@ function App() {
     <>
       <BrowserRouter>
     <div className="relative h-screen">
+      
       <Sidebar />
       {/* Main content area takes remaining space  */}
       <main className="h-full pl-[60px] bg-gray-100  overflow-y-auto">
@@ -23,19 +26,19 @@ function App() {
               {/* <Route
                 path="/applications/dl/new/local"
                 element={<AddUpdateLocalDrivingLicenseApplication />}
-              />
+              />*/}
               <Route
                 path="/applications/manage/local"
                 element={<ListLocalDrivingLicenseApplications />}
-              /> */}
+              /> 
               <Route
                 path="/applications/manage-test-types"
                 element={<ListTestTypes />}
               />
-              {/* <Route
+              <Route
                 path="/applications/manage-types"
                 element={<ListApplicationTypes />}
-              /> */}
+              />
             </Routes>
       </main>
     </div>

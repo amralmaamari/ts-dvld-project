@@ -18,7 +18,7 @@ export interface DeleteResponse {
 const peopleApi = {
   //   fetchAll: (page, pageSize) =>
   //     apiClient.get(`/?page=${page}&results=${pageSize}`),
-  fetchAll: ():Promise<AxiosResponse<IPeopleResponse>> => apiClient.get(`listpeople`),
+  fetchAll: ():Promise<AxiosResponse<IPeopleResponse>> => apiClient.get(`39011e7a-b09a-429a-987e-dc4d1a89f72c`),
   fetchById: (personId:number):Promise<AxiosResponse<IPersonResponse>> => apiClient.get<IPersonResponse>(`/people/${personId}`),
 
   create: (data:IPerson):Promise<AxiosResponse<IPersonResponse>> => apiClient.post<IPersonResponse>("/people", data),

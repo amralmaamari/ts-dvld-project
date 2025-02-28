@@ -26,6 +26,21 @@
   }
 
   export interface IContextMenu{
-    key:string,
+    key:string;
+    name?:string;
+    className?:string;
+    isSeparator?:boolean;
+    children?:IContextMenu[];
+
+  }
+
+  export interface IField{
     name:string,
+    type:string,
+    placeholder?:string,
+    label?:string,
+    errorMessage?:string,
+    required?:boolean,
+    pattern?:string,
+    min?:number,
   }

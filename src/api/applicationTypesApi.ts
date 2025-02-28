@@ -20,7 +20,7 @@ export interface IDeleteResponse {
 const applicationTypesApi = {
   //   fetchAll: (page, pageSize) =>
   //     apiClient.get(`/?page=${page}&results=${pageSize}`),
-  fetchAll: () => apiClient.get(`applicationtypes`),
+  fetchAll: () => apiClient.get(`52c046f2-59a9-48d4-8804-f01e810d7233`),
   fetchById: (applicationTypeId:number): Promise<AxiosResponse<IApplicationTypeResponse>> =>
     apiClient.get<IApplicationTypeResponse>(`/applicationtype/${applicationTypeId}`),
 

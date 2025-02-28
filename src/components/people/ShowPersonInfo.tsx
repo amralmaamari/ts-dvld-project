@@ -18,7 +18,7 @@ export default function ShowPersonInfo() {
             modelEnabledClick={true}
             enableShowBtn={false}
             onClose={onhandleClose}
-            form={<CtrlPersonCard personID={id} />}
+            form={<CtrlPersonCard  personID={parseInt(id)} showTitle={true} />}
         />
       }
     </>

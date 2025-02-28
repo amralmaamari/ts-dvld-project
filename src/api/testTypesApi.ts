@@ -21,7 +21,7 @@ export interface IDeleteResponse {
 const testTypeApi = {
   // Fetch all test types (using a mock endpoint or actual URL)
   fetchAll: (): Promise<AxiosResponse<ITestTypeResponses>> =>
-    apiClient.get(`test-types`),
+    apiClient.get(`8025c575-1390-4884-be6e-3e9e517af509`),
 
   // Fetch a test type by ID
   fetchById: (testTypeId: number): Promise<AxiosResponse<ITestTypeResponse>> =>

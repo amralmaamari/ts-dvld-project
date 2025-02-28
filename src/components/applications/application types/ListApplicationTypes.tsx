@@ -4,19 +4,19 @@ import { AppContext } from "../../../context/AppContext";
 import { Menu, Item, useContextMenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import GenericList from "../../list/GenericList";
+// import ViewModel from "../../../models/ViewModel";
+// import EditApplicationType from "./EditApplicationType";
+import { EnType, IContextMenu } from "../../../interfaces/constant";
+import { IApplicationType } from "../../../data/applicationTypes.ts";
 import ViewModel from "../../../models/ViewModel";
-// import EditTestType from "./EditTestType";
-import { EnType, IColumn, IContextMenu } from "../../../interfaces/constant";
-import { ITestTypeRow } from "../../../data/testTypes";
-import EditTestType from "./EditTestType";
+import EditApplicationType from "./EditApplicationType";
 
-const MENU_ID:string = "table_row_menu";
-
+const MENU_ID = "table_row_menu";
 
 const dataContextMenu:IContextMenu[] = [
   {
-    key: "editTestType",
-    name: "Edit Test Type",
+    key: "editApplictionType",
+    name: "Edit Appliction Type",
   },
 ];
 
@@ -26,34 +26,38 @@ export default function ListTestTypes():JSX.Element {
   const [modalComponent, setModalComponent] = useState<JSX.Element | null>(null);
 
   const fetchDataFn = useCallback(async () => {
-    const result = await api.testTypes.fetchAll();
+    const result = await api.applicationTypes.fetchAll();
 
     return {
       success: result.success,
-      data: result.testTypes || [],
+      data: result.applicationTypes || [],
     };
-  }, [api.testTypes]);
+  }, [api.applicationTypes]);
 
-  const handleItemClick = ({ event, props, data }:{event: React.MouseEvent<HTMLElement>;    props: { row: ITestTypeRow };    data:string}) => {
+  const handleItemClick = ({ event, props, data }:{event: React.MouseEvent<HTMLElement>;    props: { row: IApplicationType };    data:string}) => {
     switch (data) {
-      case "editTestType":
+      case "editApplictionType":
         setModalComponent(
           <ViewModel
           enableShowBtn={false}
           type={EnType.View}
-          modelEnabledClick={false}
-          form={<EditTestType testTypeID={props.row.TestTypeID} />}
-          onClose={() => setModalComponent(null)}
+          modelEnabledClick={true}
+          form={
+              <EditApplicationType
+              applicationTypeID ={props.row.ApplicationTypeID}
+              />
+            }
+            onClose={() => setModalComponent(null)}
           />
         );
         break;
-        default:
-          console.log("Unhandled context menu option");
-    }
+      default:
+        console.log("Unhandled context menu option");
+      }
   };
 
   const renderMenuItems = (items:IContextMenu[]) => {
-    return items.map((item:IContextMenu) => {
+    return items.map((item) => {
       return (
         <Item key={item.key} onClick={handleItemClick} data={item.key}>
           {item.name}
@@ -61,7 +65,7 @@ export default function ListTestTypes():JSX.Element {
       );
     });
   };
-  const renderRow = (row:ITestTypeRow) => {
+  const renderRow = (row:IApplicationType) => {
     // On right-click, prevent the default menu and show our custom menu
     const handleContextMenu = (e: React.MouseEvent<HTMLTableRowElement>) => {
       // Make sure event is defined
@@ -74,14 +78,13 @@ export default function ListTestTypes():JSX.Element {
 
     return (
       <tr
-        key={row.TestTypeID}
+        key={row.ApplicationTypeID}
         onContextMenu={handleContextMenu}
         className=" even:bg-slate-400 odd:bg-slate-100 text-1xl hover:bg-slate-500 transition"
       >
-        <td className="py-2 px-6">{row.TestTypeID}</td>
-        <td className="py-2 px-6">{row.TestTypeTitle}</td>
-        <td className="py-2 px-6">{row.TestTypeDescription}</td>
-        <td className="py-2 px-6">{row.TestTypeFees}</td>
+        <td className="py-2 px-6">{row.ApplicationTypeID}</td>
+        <td className="py-2 px-6">{row.ApplicationTypeTitle}</td>
+        <td className="py-2 px-6">{row.ApplicationFees}</td>
       </tr>
     );
   };
@@ -91,10 +94,10 @@ export default function ListTestTypes():JSX.Element {
   };
   return (
     <>
-      <GenericList<ITestTypeRow>
-        title="Manage Test Type"
+      <GenericList<IApplicationType>
+        title="Manage Appliction Types"
         showAddButton={false}
-        createModalType={EnType.View}
+        createModalType={EnType.View}        
         tableName="testType"
         columns={columns}
         renderRow={renderRow}
@@ -106,9 +109,8 @@ export default function ListTestTypes():JSX.Element {
   );
 }
 
-const columns:IColumn[] = [
+const columns = [
   { header: "ID", accessor: "id" },
   { header: "Title", accessor: "title" },
-  { header: "Description", accessor: "description" },
   { header: "Fees", accessor: "fess" },
 ];

@@ -6,13 +6,13 @@ import { ILocalDrivingLicenseApplications } from "../data/localDrivingLicenseApp
 // Response when fetching a single 
 export interface ILocalDrivingLicenseApplicationResponse {
   success: boolean;
-  applicationType: ILocalDrivingLicenseApplications;
+  allLocalDrivingLicenseApplications: ILocalDrivingLicenseApplications;
 }
 
 // Response when fetching multiple 
 export interface ILocalDrivingLicenseApplicationResponses {
   success: boolean;
-  applicationTypes: ILocalDrivingLicenseApplications[];
+  allLocalDrivingLicenseApplications: ILocalDrivingLicenseApplications[];
 }
 
 export interface IDeleteResponse {
@@ -21,7 +21,7 @@ export interface IDeleteResponse {
 const localDrivingLicenseApplicationsApi = {
   //   fetchAll: (page, pageSize) =>
   //     apiClient.get(`/?page=${page}&results=${pageSize}`),
-  fetchAll: () => apiClient.get(`719d259f-8b04-4637-affc-c5c45997a5cd`),
+  fetchAll: () => apiClient.get(`0efca6d3-f063-43a1-bb51-fc95ff63e133`),
   fetchById: (personId:number): Promise<AxiosResponse<ILocalDrivingLicenseApplicationResponse>> => apiClient.get<ILocalDrivingLicenseApplicationResponse>(`/local-application/${personId}`),
 
   create: (data:ILocalDrivingLicenseApplicationResponse): Promise<AxiosResponse<ILocalDrivingLicenseApplicationResponse>> => apiClient.post<ILocalDrivingLicenseApplicationResponse>("/local-application", data),

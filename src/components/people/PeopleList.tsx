@@ -6,7 +6,7 @@ import CtrlPersonCard from "../people/controls/CtrlPerosnCard";
 // import GenericList from "../List/GenericList";
 import { Ipeople, IPerson } from "../../data/people";
 import { EnType, IColumn,IDataResponse,ISearchOptions } from "../../interfaces/constant";
-import GenericList from "../List/GenericList";
+import GenericList from "../list/GenericList";
 import FormModal from "../../models/FormModal";
 
 

@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react";
-import InputField from "../../../../../vite-dvld-project/src/components/InputField.jsx";
-import { testTypeActions } from "../../../../../vite-dvld-project/src/lib/actions.js";
+import React, { JSX, useEffect, useState } from "react";
+import InputField from "../../InputField.js";
+import { testTypeActions } from "../../../lib/actions.js";
+import { ITestTypeRow } from "../../../data/testTypes.js";
 
-function TestTypeFields({ values, onChange }) {
+interface ITestTypeFields{
+  values:ITestTypeRow;
+  onChange:(field: keyof ITestTypeFields, value:string)=>void;
+}
+function TestTypeFields({ values, onChange }:ITestTypeFields) {
   const fields = [
     {
-      name: "title",
+      name: "TestTypeTitle",
       type: "text",
       placeholder: "Title",
       label: "Title",
@@ -15,7 +20,7 @@ function TestTypeFields({ values, onChange }) {
       pattern: "^[a-zA-Z0-9.,'()\\-\\s]{3,30}$",
     },
     {
-      name: "description",
+      name: "TestTypeDescription",
       type: "text",
       placeholder: "Description",
       label: "Description",
@@ -24,7 +29,7 @@ function TestTypeFields({ values, onChange }) {
       pattern: "^[a-zA-Z0-9.,'()\\-\\s]{3,}$",
     },
     {
-      name: "fees",
+      name: "TestTypeFees",
       type: "number",
       placeholder: "Fees",
       label: "Fees",
@@ -40,24 +45,28 @@ function TestTypeFields({ values, onChange }) {
         <InputField
           key={field.name}
           {...field}
-          value={values[field.name] || ""}
-          onChange={(e) => onChange(field.name, e.target.value)}
+          value={values[field.name as keyof ITestTypeRow] }
+          onChange={(e) => onChange(field.name  as keyof ITestTypeFields, e.target.value)}
         />
       ))}
     </div>
   );
 }
 
-export default function EditTestType({ testTypeID }) {
+interface IEditTestTypeProps{
+  testTypeID:number,
+}
+
+export default function EditTestType({ testTypeID }:IEditTestTypeProps):JSX.Element {
   const DEFAULT_VALUE = "";
   const [values, setValues] = useState({
-    testTypeID: DEFAULT_VALUE,
-    title: DEFAULT_VALUE,
-    description: DEFAULT_VALUE,
-    fees: DEFAULT_VALUE,
+    TestTypeID: -1,
+    TestTypeTitle: DEFAULT_VALUE,
+    TestTypeDescription: DEFAULT_VALUE,
+    TestTypeFees: -1,
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!testTypeID) return;
@@ -68,10 +77,10 @@ export default function EditTestType({ testTypeID }) {
         const data = await testTypeActions.fetchTestTypeById(testTypeID);
         if (data) {
           setValues({
-            testTypeID: data.TestTypeID || DEFAULT_VALUE,
-            title: data.TestTypeTitle || DEFAULT_VALUE,
-            description: data.TestTypeDescription || DEFAULT_VALUE,
-            fees: data.TestTypeFees || DEFAULT_VALUE,
+            TestTypeID: data.TestTypeID ,
+            TestTypeTitle: data.TestTypeTitle || DEFAULT_VALUE,
+            TestTypeDescription: data.TestTypeDescription || DEFAULT_VALUE,
+            TestTypeFees: data.TestTypeFees ,
           });
         }
       } catch (error) {
@@ -84,12 +93,12 @@ export default function EditTestType({ testTypeID }) {
     fetchTestTypeById();
   }, [testTypeID]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert(`Data Submitted Successfully. TestTypeID: ${values.testTypeID}`);
+    alert(`Data Submitted Successfully. TestTypeID: ${values.TestTypeID}`);
   };
 
-  const handleChange = (field, value) => {
+  const handleChange = (field: keyof ITestTypeRow, value:string) => {
     setValues((prev) => ({
       ...prev,
       [field]: value,

@@ -1,4 +1,6 @@
 import { peopleData,IPerson } from "../data/people.ts";
+import { applicationTypesData } from "../data/applicationTypes.ts";
+import { TestTypesData } from "../data/testTypes.ts";
 
 
 
@@ -7,13 +9,18 @@ interface Application {
   // Add additional properties as needed
 }
 
-interface TestType {
+interface ITestType {
   TestTypeID: number;
+  TestTypeTitle: string;
+  TestTypeDescription: string;
+  TestTypeFees: number;
   // Add additional properties as needed
 }
 
-interface ApplicationType {
+interface IApplicationType {
   ApplicationTypeID: number;
+  ApplicationTypeTitle:string;
+  ApplicationFees:number;
   // Add additional properties as needed
 }
 
@@ -95,37 +102,37 @@ async function fetchPersonByNationalNo(
 //   });
 // }
 
-// async function fetchTestTypeById(testTypeId: number): Promise<TestType> {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       const data = Data.TestTypes.testTypes.find(
-//         (p: TestType) => p.TestTypeID === testTypeId
-//       );
+async function fetchTestTypeById(testTypeId: number): Promise<ITestType> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = TestTypesData.testTypes.find(
+        (p: ITestType) => p.TestTypeID === testTypeId
+      );
 
-//       if(data){
-//         return resolve(data);
-//       }
-//       return reject(null);
-//     }, 500);
-//   });
-// }
+      if(data){
+        return resolve(data);
+      }
+      return reject(null);
+    }, 500);
+  });
+}
 
-// async function fetchApplicationTypeById(
-//   applicationTypeID: number
-// ): Promise<ApplicationType> {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       const data = Data.ApplicationTypes.applicationTypes.find(
-//         (p: ApplicationType) => p.ApplicationTypeID === applicationTypeID
-//       );
+async function fetchApplicationTypeById(
+  applicationTypeID: number
+): Promise<IApplicationType> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = applicationTypesData.applicationTypes.find(
+        (p: IApplicationType) => p.ApplicationTypeID === applicationTypeID
+      );
 
-//       if(data){
-//         return resolve(data);
-//       }
-//       return reject(null);
-//     }, 500);
-//   });
-// }
+      if(data){
+        return resolve(data);
+      }
+      return reject(null);
+    }, 500);
+  });
+}
 
 export const peopleActions = {
 
@@ -140,10 +147,10 @@ export const peopleActions = {
 //   fetchApplicationById,
 // };
 
-// export const testTypeActions = {
-//   fetchTestTypeById,
-// };
+export const testTypeActions = {
+  fetchTestTypeById,
+};
 
-// export const applicationTypeActions = {
-//   fetchApplicationTypeById,
-// };
+export const applicationTypeActions = {
+  fetchApplicationTypeById,
+};

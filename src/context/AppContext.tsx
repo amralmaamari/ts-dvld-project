@@ -1,8 +1,11 @@
 import React, { createContext, useState, useMemo, ReactNode } from "react";
 import peopleApi, { IPersonResponse, IPeopleResponse, DeleteResponse } from "../api/peopleApi";
 import { IPerson } from "../data/people";
-import { ItestTypesResponse } from "../data/testTypes";
+import { ITestTypesResponses } from "../data/testTypes";
 import testTypeApi, { ITestTypeResponses } from "../api/testTypesApi";
+import applicationTypesApi,{  IApplicationTypeResponses } from "../api/applicationTypesApi";
+import { IApplicationResponses } from "../api/applicationsApi";
+import localDrivingLicenseApplicationsApi, {  ILocalDrivingLicenseApplicationResponses } from "../api/localDrivingLicenseApplicationsApi";
 
 // Define the shape of our Context
 interface IAppContext {
@@ -18,6 +21,13 @@ interface IAppContext {
     },
     testTypes: {
       fetchAll: () => Promise<ITestTypeResponses>;
+    }
+    applicationTypes: {
+      fetchAll: () => Promise<IApplicationTypeResponses>;
+    }
+    localDrivingLicenseApplications:{
+      fetchAll: () => Promise<ILocalDrivingLicenseApplicationResponses>;
+
     }
   };
   
@@ -79,11 +89,24 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({ children }) =>
           handleApiCall<DeleteResponse>(peopleApi.delete, id),
       },
       testTypes: {
-        fetchAll: (): Promise<ItestTypesResponse> =>
-          handleApiCall<ItestTypesResponse>(testTypeApi.fetchAll).then(
+        fetchAll: (): Promise<ITestTypesResponses> =>
+          handleApiCall<ITestTypesResponses>(testTypeApi.fetchAll).then(
+            (data) => data
+          ),
+      },      
+      applicationTypes: {
+        fetchAll: (): Promise<IApplicationResponses> =>
+          handleApiCall<IApplicationResponses>(applicationTypesApi.fetchAll).then(
+            (data) => data
+          ),
+      },
+      localDrivingLicenseApplications:{
+        fetchAll: (): Promise<ILocalDrivingLicenseApplicationResponses> =>
+          handleApiCall<ILocalDrivingLicenseApplicationResponses>(localDrivingLicenseApplicationsApi.fetchAll).then(
             (data) => data
           ),
       }
+      
     }),
     []
   );
