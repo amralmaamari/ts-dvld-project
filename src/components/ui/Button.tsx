@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { formModel } from "../assets/assets";
+import { formModel } from "../../assets/assets";
 
 export type ButtonType = "Create" | "Update" | "Delete" | "View";
 export type Variant =

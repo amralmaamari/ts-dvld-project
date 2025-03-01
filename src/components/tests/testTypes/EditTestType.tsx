@@ -1,5 +1,5 @@
 import React, { JSX, useEffect, useState } from "react";
-import InputField from "../../InputField.js";
+import InputField from "../../ui/InputField.js";
 import { testTypeActions } from "../../../lib/actions.js";
 import { ITestTypeRow } from "../../../data/testTypes.js";
 

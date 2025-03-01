@@ -24,8 +24,23 @@ interface IApplicationType {
   // Add additional properties as needed
 }
 
-const deletePerson = (Id: number): void => {
+
+const deletePerson = (Id:number) => {
   alert(`Deleting person with ID: ${Id}`);
+};
+
+const createPerson = (data:IPerson) => {
+  if (data) {
+    alert(`Add New  person successfully ):`);
+    return 60;
+  } else return null;
+};
+
+const updatePerson = (data:IPerson) => {
+  if (data) {
+    alert(`Update  person successfully ):`);
+    return data;
+  } else return -1;
 };
 
 
@@ -135,7 +150,8 @@ async function fetchApplicationTypeById(
 }
 
 export const peopleActions = {
-
+  createPerson,
+  updatePerson,
   deletePerson,
   fetchPersonById,
   fetchPersonByNationalNo,

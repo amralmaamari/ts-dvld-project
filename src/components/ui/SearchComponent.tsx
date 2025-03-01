@@ -4,7 +4,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { ISearchOptions } from "../interfaces/constant";
+import { ISearchOptions } from "../../interfaces/constant";
 
 interface ISearchComponentProps {
   searchOptions?: ISearchOptions[];

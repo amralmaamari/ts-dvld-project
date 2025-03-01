@@ -1,6 +1,6 @@
 import { JSX, useEffect } from "react";
 import { usersIcons } from "../../../assets/assets";
-import TitleWithIcon from "../../TitleWithIcon";
+import TitleWithIcon from "../../ui/TitleWithIcon";
 // import ViewModel from "../../Models/ViewModel";
 // import CtrlApplicationBasicInfo from "../Controls/CtrlApplicationBasicInfo";
 

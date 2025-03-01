@@ -1,10 +1,11 @@
 import { JSX, useContext, useEffect, useMemo, useState } from "react";
-import Table from "../Table";
-import SearchComponent from "../SearchComponent";
-import FormModal from "../../models/FormModal";
+import Table from "../ui/Table";
+import SearchComponent from "../ui/SearchComponent";
 import { AppContext } from "../../context/AppContext";
 import { EnType, IColumn, IDataResponse, ISearchOptions } from "../../interfaces/constant";
-import Pagination from "../Pagination";
+import Pagination from "../ui/Pagination";
+import AddUpdateModal from "../../models/AddUpdateModal";
+import AddUpdatePeople from "../people/AddUpdatePeople";
 interface IGenericListProps<T>{
   title:string,
   tableName:string,
@@ -96,7 +97,7 @@ function GenericList<T>({
               />
             )}
           {showAddButton&&
-            <FormModal tablename={tableName} type={createModalType} />
+          <AddUpdateModal type={EnType.Create} children={<AddUpdatePeople />}/>
           }
           </div>
           <Table columns={columns} renderRow={renderRow} data={paginatedData} />

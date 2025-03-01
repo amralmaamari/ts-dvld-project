@@ -1,6 +1,6 @@
 import React, { JSX, ReactNode } from "react";
 import "./Table.css";
-import { IColumn } from "../interfaces/constant";
+import { IColumn } from "../../interfaces/constant";
 
 
 interface ITableProps<T>{

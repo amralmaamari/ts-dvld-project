@@ -1,5 +1,5 @@
 import { JSX, useEffect, useState } from "react";
-import InputField from "../../InputField.js";
+import InputField from "../../ui/InputField.js";
 import { IField } from "../../../interfaces/constant.js";
 import { IApplicationType } from "../../../data/applicationTypes.js";
 import { applicationTypeActions } from "../../../lib/actions.js";

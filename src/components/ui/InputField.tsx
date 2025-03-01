@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, JSX, useState } from "react";
 import "./InputField.css";
 interface IinputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   errorMessage?: string;
 }
 export default function InputField({label, errorMessage, onChange, ...inputProps}:IinputFieldProps):JSX.Element {

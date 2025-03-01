@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { arrowIcons } from "../assets/assets";
+import { arrowIcons } from "../../assets/assets";
 
 interface IPaginationProps{
   currentPage:number,

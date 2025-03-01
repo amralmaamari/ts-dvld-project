@@ -4,7 +4,7 @@ import { peopleActions } from "../../lib/actions";
 import { usersIcons } from "../../assets/assets";
 import CtrlPersonCardWithFilter from "../People/Controls/CtrlPersonCardWithFilter";
 import LabelWithIcon from "../LabelWithIcon";
-import Button from "../Button";
+import Button from "../ui/Button";
 import ReactTabsComponent from "../ReactTabsComponent";
 
 // 🎯 Context for Form State Management

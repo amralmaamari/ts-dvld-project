@@ -1,6 +1,6 @@
 import ViewModel from "./ViewModel.tsx";
 import { EnType } from "../interfaces/constant.ts";
-import Button from "../components/Button.tsx";
+import Button from "../components/ui/Button.tsx";
 import { JSX } from "react";
 
 interface IAlertDialogProps{

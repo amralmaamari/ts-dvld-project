@@ -8,6 +8,9 @@ import { Ipeople, IPerson } from "../../data/people";
 import { EnType, IColumn,IDataResponse,ISearchOptions } from "../../interfaces/constant";
 import GenericList from "../list/GenericList";
 import FormModal from "../../models/FormModal";
+import DeleteModal from "../../models/DeleteModal";
+import AddUpdateModal from "../../models/AddUpdateModal";
+import AddUpdatePeople from "./AddUpdatePeople";
 
 
 
@@ -63,6 +66,12 @@ function PeopleList():JSX.Element {
     { header: "Email", accessor: "Email", className: "hidden md:block" },
   ];
 
+  //--------Start Logic Of Row ---------------
+  const handleDeleteRow=()=>{
+    return false;
+  }
+  //------------------------------------------
+
   const renderRow = (row:IPerson) => {
     if (!row) return null;
     return (
@@ -82,14 +91,14 @@ function PeopleList():JSX.Element {
         <td className="py-2 px-6">{row.Phone}</td>
         <td className="hidden md:table-cell py-2 px-6">{row.Email}</td>
         <td className="flex w-[200px] align-middle gap-2 h-full">
-          <FormModal tablename="People" type={EnType.Update} id={row.PersonID} />
-          <FormModal tablename="People" type={EnType.Delete} id={row.PersonID} />
+          <AddUpdateModal type={EnType.Update}  children={<AddUpdatePeople personId={row.PersonID} />} />
           <ViewModel
-          enableShowBtn={true}
-          modelEnabledClick={true}
-            type={EnType.View}
-            form={<CtrlPersonCard personID={row.PersonID} />}
+            enableShowBtn={true}
+            modelEnabledClick={true}
+              type={EnType.View}
+              form={<CtrlPersonCard personID={row.PersonID} />}
           />
+          <DeleteModal id={row.PersonID} onConfirmDelete ={handleDeleteRow}/>
           
         </td>
       </tr>

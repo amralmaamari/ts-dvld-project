@@ -2,8 +2,11 @@ import { JSX, useEffect, useMemo, useState } from 'react';
 import { usersIcons, genderIcons } from '../../../assets/assets';
 import { peopleActions } from '../../../lib/actions';
 import { IPerson } from '../../../data/people';
-import TitleWithIcon from '../../TitleWithIcon';
+import TitleWithIcon from '../../ui/TitleWithIcon';
 import ViewModel from '../../../models/ViewModel';
+import AddUpdateModal from '../../../models/AddUpdateModal';
+import { EnType } from '../../../interfaces/constant';
+import AddUpdatePeople from '../AddUpdatePeople';
 
 // Interface for the local person details state
 export interface IPersonDetails {
@@ -165,12 +168,7 @@ export default function CtrlPersonCard({
 
         {/* Update Link (opens modal or view model) */}
         {selectedPerson && (
-          <ViewModel
-            form={<h3>Hello</h3>}
-            type="Update"
-            modelEnabledClick={true}
-            enableShowBtn={true}
-          />
+          <AddUpdateModal type={EnType.Update} children={<AddUpdatePeople personInfo={selectedPerson} />}   />
         )}
 
         {/* Image Preview Box */}
