@@ -1,4 +1,4 @@
-import { useReducer, createContext, useContext } from "react";
+import { useReducer, createContext, useContext, JSX } from "react";
 import { Data } from "../../assets/data";
 import { peopleActions } from "../../lib/actions";
 import { usersIcons } from "../../assets/assets";
@@ -11,9 +11,12 @@ import ReactTabsComponent from "../ReactTabsComponent";
 const FormContext = createContext();
 
 // 🎯 Main Component
+interface IAddUpdateLocalDrivingLicenseApplicationProps{
+  localDrivingLicenseApplicationID:number;
+}
 export default function AddUpdateLocalDrivingLicenseApplication({
   localDrivingLicenseApplicationID,
-}) {
+}:IAddUpdateLocalDrivingLicenseApplicationProps):JSX.Element {
   const initialState = getInitialState(localDrivingLicenseApplicationID);
   const [state, dispatch] = useReducer(formReducer, initialState);
   // const handleClose = () => {
@@ -29,7 +32,7 @@ export default function AddUpdateLocalDrivingLicenseApplication({
 }
 
 // 📌 Generate Initial State
-function getInitialState(localDrivingLicenseApplicationID) {
+function getInitialState(localDrivingLicenseApplicationID:number) {
   return {
     personId: null,
     applicationId: localDrivingLicenseApplicationID || "[????]",
@@ -167,8 +170,13 @@ function LicenseClassDropdown() {
 }
 
 // 📌 Application Field Component
-function ApplicationField({ label, fieldKey, icon }) {
-  const { state } = useContext(FormContext);
+interface IApplicationFieldsProps{
+  label:string;
+  fieldKey:string;
+  icon:string;
+}
+function ApplicationField({ label, fieldKey, icon }:IApplicationFieldsProps) {
+  const { state} = useContext(FormContext);
   return (
     <div className="flex flex-wrap items-center gap-2">
       <LabelWithIcon label={label} icon={icon} />
@@ -180,7 +188,12 @@ function ApplicationField({ label, fieldKey, icon }) {
 }
 
 // 📌 Application Fields Array
-const applicationFields = [
+interface IapplicationFieldsProps{
+  key:string;
+  label:string;
+  icon:string;
+}
+const applicationFields:IapplicationFieldsProps[] = [
   {
     key: "applicationId",
     label: "D.L. Application ID:",
@@ -200,7 +213,7 @@ const applicationFields = [
 ];
 
 // 📌 Helper Function to Format Date
-function formatDate(date) {
+function formatDate(date:Date):string {
   return date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",

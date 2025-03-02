@@ -49,12 +49,12 @@ function PeopleList():JSX.Element {
   ];
 
   const searchOptions:ISearchOptions[] = [
-    { header: "PersonID", accessor: "PersonID" },
-    { header: "NationalNo", accessor: "NationalNo" },
-    { header: "FirstName", accessor: "FirstName" },
-    { header: "SecondName", accessor: "SecondName" },
-    { header: "ThirdName", accessor: "ThirdName" },
-    { header: "LastName", accessor: "LastName" },
+    { header: "Person ID", accessor: "PersonID" },
+    { header: "Nationa lNo", accessor: "NationalNo" },
+    { header: "First Name", accessor: "FirstName" },
+    { header: "Second Name", accessor: "SecondName" },
+    { header: "Third Name", accessor: "ThirdName" },
+    { header: "Last Name", accessor: "LastName" },
     { header: "Nationality", accessor: "Nationality" },
     {
       header: "Gendor",

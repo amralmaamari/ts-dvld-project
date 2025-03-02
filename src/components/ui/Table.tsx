@@ -13,7 +13,7 @@ export default function Table<T>({ columns, renderRow, data }:ITableProps<T>):JS
   return (
     <div className="h-[400px] border-collapse text-left table-container  overflow-auto rounded-lg">
       <table className="w-full bg-slate-200 ">
-        <thead className="sticky top-0 bg-primary text-white py-3">
+        <thead className="sticky top-0 bg-gray-600 text-white py-3">
           <tr className="py-3 px-6">
             {columns.map((column) => (
               <th
