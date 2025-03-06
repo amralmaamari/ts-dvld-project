@@ -12,9 +12,9 @@ interface ITableProps<T>{
 export default function Table<T>({ columns, renderRow, data }:ITableProps<T>):JSX.Element {
   return (
     <div className="h-[400px] border-collapse text-left table-container  overflow-auto rounded-lg">
-      <table className="w-full bg-slate-200 ">
-        <thead className="sticky top-0 bg-gray-600 text-white py-3">
-          <tr className="py-3 px-6">
+      <table className="w-full  ">
+        <thead className="sticky top-0 ">
+          <tr className="py-3 px-6  text-white h-12" style={{backgroundColor:"#36304a"}}>
             {columns.map((column) => (
               <th
                 key={column.accessor}

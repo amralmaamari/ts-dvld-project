@@ -1,21 +1,18 @@
 import { JSX, useCallback, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-// import FormModal from "../Models/FormModal";
-import ViewModel from "../../models/ViewModel";
-import CtrlPersonCard from "../people/controls/CtrlPerosnCard";
-// import GenericList from "../List/GenericList";
-import { Ipeople, IPerson } from "../../data/people";
+import {  IPerson } from "../../data/listPeople";
 import { EnType, IColumn,IDataResponse,ISearchOptions } from "../../interfaces/constant";
 import GenericList from "../list/GenericList";
-import FormModal from "../../models/FormModal";
 import DeleteModal from "../../models/DeleteModal";
 import AddUpdateModal from "../../models/AddUpdateModal";
 import AddUpdatePeople from "./AddUpdatePeople";
+import { useNavigate } from "react-router-dom";
 
 
 
 function PeopleList():JSX.Element {
   const { api } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const fetchDataFn = useCallback(async ():Promise<IDataResponse> => {
     try {
@@ -31,10 +28,7 @@ function PeopleList():JSX.Element {
   const columns:IColumn[] = [
     { header: "PersonID", accessor: "personid" },
     { header: "NationalNo", accessor: "nationalno" },
-    { header: "FirstName", accessor: "firstname" },
-    { header: "SecondName", accessor: "secondname" },
-    { header: "ThirdName", accessor: "thirdname" },
-    { header: "LastName", accessor: "lastname" },
+    { header: "FullName", accessor: "fullname" },
     { header: "Gendor", accessor: "gendor" },
     { header: "DateOfBirth", accessor: "dateofbirth" },
     { header: "Nationality", accessor: "nationality" },
@@ -51,10 +45,7 @@ function PeopleList():JSX.Element {
   const searchOptions:ISearchOptions[] = [
     { header: "Person ID", accessor: "PersonID" },
     { header: "Nationa lNo", accessor: "NationalNo" },
-    { header: "First Name", accessor: "FirstName" },
-    { header: "Second Name", accessor: "SecondName" },
-    { header: "Third Name", accessor: "ThirdName" },
-    { header: "Last Name", accessor: "LastName" },
+    { header: "Full Name", accessor: "FullName" },
     { header: "Nationality", accessor: "Nationality" },
     {
       header: "Gendor",
@@ -79,25 +70,24 @@ function PeopleList():JSX.Element {
         key={row.PersonID}
         className=" even:bg-slate-400 odd:bg-slate-100 text-1xl hover:bg-slate-500 transition"
       >
-        <td className="py-2 px-6">{row.PersonID}</td>
-        <td className="py-2 px-6">{row.NationalNo}</td>
-        <td className="py-2 px-6">{row.FirstName}</td>
-        <td className="py-2 px-6">{row.SecondName}</td>
-        <td className="py-2 px-6">{row.ThirdName}</td>
-        <td className="py-2 px-6">{row.LastName}</td>
-        <td className="py-2 px-6">{row.Gendor}</td>
-        <td className="py-2 px-6">{row.DateOfBirth}</td>
-        <td className="py-2 px-6">{row.Nationality}</td>
-        <td className="py-2 px-6">{row.Phone}</td>
-        <td className="hidden md:table-cell py-2 px-6">{row.Email}</td>
-        <td className="flex w-[200px] align-middle gap-2 h-full">
+        <td className="py-2 px-6 bg-white">{row.PersonID}</td>
+        <td className="py-2 px-6 bg-white">{row.NationalNo}</td>
+        <td className="py-2 px-6 bg-white whitespace-nowrap">{[
+            row.FirstName,
+            row.SecondName,
+            row.ThirdName,
+            row.LastName,
+          ].filter(Boolean).join(" ")}</td>
+        <td className="py-2 px-6 bg-white">{row.Gendor}</td>
+        <td className="py-2 px-6 bg-white">{row.DateOfBirth}</td>
+        <td className="py-2 px-6 bg-white">{row.Nationality}</td>
+        <td className="py-2 px-6 bg-white">{row.Phone}</td>
+        <td className="hidden md:table-cell py-2 px-6 bg-white">{row.Email}</td>
+        <td className="flex w-[200px] align-middle gap-2 h-full bg-white">
           <AddUpdateModal type={EnType.Update}  children={<AddUpdatePeople personId={row.PersonID} />} />
-          <ViewModel
-            enableShowBtn={true}
-            modelEnabledClick={true}
-              type={EnType.View}
-              form={<CtrlPersonCard personID={row.PersonID} />}
-          />
+         
+          <button className="bg-green-400 rounded-md text-white  px-3 w-[20] h-[20]" onClick={()=>    navigate(`/people/show/${row.PersonID}`)}>View</button>
+          
           <DeleteModal id={row.PersonID} onConfirmDelete ={handleDeleteRow}/>
           
         </td>
@@ -105,11 +95,19 @@ function PeopleList():JSX.Element {
     );
   };
 
+
+  const AddNewButton: React.FC = () => {
+    return ( 
+    <button  className="bg-green-400 rounded-md text-white px-3 py-1">
+      Add New Person
+    </button>)
+  }
   return (
     <>
       <GenericList<IPerson>
         title="People List"
         tableName="People"
+        addNewButton={<AddNewButton />}
         createModalType={EnType.Create}
         columns={columns}
         searchOptions={searchOptions}

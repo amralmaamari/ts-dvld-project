@@ -1,11 +1,11 @@
 import { JSX, useCallback, useEffect, useState } from "react";
 import { assets, usersIcons, genderIcons } from "../../assets/assets.js";
-import { CountriesData, ICountry } from "../../data/countries.js";
+import { ListCountriesData, IListCountry } from "../../data/listCountries.js";
 import { peopleActions } from "../../lib/actions.js";
 import InputField from "../ui/InputField.js";
 import TitleWithIcon from "../ui/TitleWithIcon.js";
 import Button from "../ui/Button.js";
-import { IPerson } from "../../data/people.js";
+import { IPerson } from "../../data/listPeople.js";
 import { EnType } from "../../interfaces/constant.js";
 import SelectField from "../ui/SelectField.js";
 
@@ -481,12 +481,12 @@ export default function AddUpdatePeople({
         <div className="flex justify-between flex-col md:flex-row flex-wrap gap-3 my-3">
           <GenderRadio values={values} onChange={handleChange} />
           
-          <SelectField<ICountry>
+          <SelectField<IListCountry>
             label="Country"
             name="country"
             value={values.country}
             icon={usersIcons.User322}
-            options={CountriesData}
+            options={ListCountriesData}
             nameOfValue="country"
             nameOfLabel="country"
             onChange={(e) =>
@@ -498,7 +498,7 @@ export default function AddUpdatePeople({
         <div className="flex flex-col md:flex-row flex-wrap gap-3 my-3">
           <AddressField values={values} onChange={handleChange} />
           <ImageUploadPreview values={values}   onChange={(newValues) => setValues(newValues)}
- />
+  />
         </div>
         
         <button className={`w-full ${EnType.Create === type ?"bg-green-500":"bg-blue-600"} p-2 text-white font-bold`}  >{type}</button>

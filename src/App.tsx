@@ -9,27 +9,29 @@ import Sidebar from './components/sidebar/Sidebar';
 import ListTestTypes from './components/tests/testTypes/ListTestTypes';
 import ListApplicationTypes from './components/applications/application types/ListApplicationTypes';
 import ListLocalDrivingLicenseApplications from './components/local driving license application/ListLocalDrivingLicenseApplications';
+// import CtrlPersonCardWithFilter from './components/people/controls/CtrlPersonCardWithFilter';
+import AddUpdateLocalDrivingLicenseApplication from './components/local driving license application/AddUpdateLocalDrivingLicenseApplication';
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
-    <div className="relative h-screen">
+    <div className={`h-screen xl:flex `}>
       
-      <Sidebar />
+      <Sidebar  />
       {/* Main content area takes remaining space  */}
-      <main className="h-full pl-[60px] bg-gray-100  overflow-y-auto">
+      <main className="pl-12 h-screen xl:pl-0  xl:flex-1  bg-gray-100 overflow-y-auto ">
             <Routes>
               <Route path="/people/list" element={<PeopleList />} />
-              <Route path="/people/:id" element={<ShowPersonInfo />} />
-              {/* <Route
+              <Route path="/people/show/:personID" element={<ShowPersonInfo />} />
+              <Route
                 path="/applications/dl/new/local"
                 element={<AddUpdateLocalDrivingLicenseApplication />}
-              />*/}
+              />
               <Route
                 path="/applications/manage/local"
-                element={<ListLocalDrivingLicenseApplications />}
+                element={<ListLocalDrivingLicenseApplications  />}
               /> 
               <Route
                 path="/applications/manage-test-types"
@@ -41,6 +43,7 @@ function App() {
               />
             </Routes>
       </main>
+      
     </div>
       </BrowserRouter>
     </>

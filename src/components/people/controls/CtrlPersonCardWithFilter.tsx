@@ -7,13 +7,13 @@ import  {
     JSX,
   } from 'react';
   import { peopleActions } from '../../../lib/actions';
-  import CtrlPersonCard from './CtrlPerosnCard';
+  import CtrlPersonCard from '../controls/CtrlPerosnCard';
   import { searchIcons } from '../../../assets/assets';
-  import { IPerson } from '../../../data/people';
+  import { IPerson } from '../../../data/listPeople';
   
   interface ICtrlPersonCardWithFilterProps {
-    personId?: number;
-    onPersonSelected?: (personId: number) => void;
+    personData?: IPerson;
+    onPersonSelected?: (personInfo: IPerson) => void;
     showAddPerson?: boolean;
     filterEnable?: boolean;
   }
@@ -27,7 +27,7 @@ import  {
   ];
   
   export default function CtrlPersonCardWithFilter({
-    personId,
+    personData,
     onPersonSelected,
     showAddPerson = true,
     filterEnable = true,
@@ -48,6 +48,16 @@ import  {
       inputRef.current?.focus();
     }, [filterBy]);
   
+    useEffect(() => {
+      if(personData){
+        setPerson(personData);
+        setFilterBy("PersonID");
+        setFilterValue(personData.PersonID);
+        setIsFilterActive(false);
+      }
+    }, [personData]);
+    
+
     const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
         loadPersonInfo();
@@ -94,7 +104,7 @@ import  {
           setPerson(fetchedPerson);
           setIsFilterActive(false);
           if (onPersonSelected) {
-            onPersonSelected(fetchedPerson.PersonID);
+            onPersonSelected(fetchedPerson);
           }
         }
       } catch (err: any) {
@@ -150,7 +160,7 @@ import  {
         </fieldset>
   
         {/* Display the Person Card if a person is found */}
-        <CtrlPersonCard personID={person?.PersonID} />
+        <CtrlPersonCard personData={person} />
       </>
     );
   }

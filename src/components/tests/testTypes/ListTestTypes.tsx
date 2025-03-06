@@ -7,7 +7,7 @@ import GenericList from "../../list/GenericList";
 import ViewModel from "../../../models/ViewModel";
 // import EditTestType from "./EditTestType";
 import { EnType, IColumn, IContextMenu } from "../../../interfaces/constant";
-import { ITestTypeRow } from "../../../data/testTypes";
+import { IListTestTypeRow } from "../../../data/listTestTypes";
 import EditTestType from "./EditTestType";
 
 const MENU_ID:string = "table_row_menu";
@@ -34,7 +34,7 @@ export default function ListTestTypes():JSX.Element {
     };
   }, [api.testTypes]);
 
-  const handleItemClick = ({ event, props, data }:{event: React.MouseEvent<HTMLElement>;    props: { row: ITestTypeRow };    data:string}) => {
+  const handleItemClick = ({ event, props, data }:{event: React.MouseEvent<HTMLElement>;    props: { row: IListTestTypeRow };    data:string}) => {
     switch (data) {
       case "editTestType":
         setModalComponent(
@@ -61,7 +61,7 @@ export default function ListTestTypes():JSX.Element {
       );
     });
   };
-  const renderRow = (row:ITestTypeRow) => {
+  const renderRow = (row:IListTestTypeRow) => {
     // On right-click, prevent the default menu and show our custom menu
     const handleContextMenu = (e: React.MouseEvent<HTMLTableRowElement>) => {
       // Make sure event is defined
@@ -91,7 +91,7 @@ export default function ListTestTypes():JSX.Element {
   };
   return (
     <>
-      <GenericList<ITestTypeRow>
+      <GenericList<IListTestTypeRow>
         title="Manage Test Type"
         showAddButton={false}
         createModalType={EnType.View}

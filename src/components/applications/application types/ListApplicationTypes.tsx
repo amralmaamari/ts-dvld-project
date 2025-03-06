@@ -7,7 +7,7 @@ import GenericList from "../../list/GenericList";
 // import ViewModel from "../../../models/ViewModel";
 // import EditApplicationType from "./EditApplicationType";
 import { EnType, IContextMenu } from "../../../interfaces/constant";
-import { IApplicationType } from "../../../data/applicationTypes.ts";
+import { IListApplicationType } from "../../../data/listApplicationTypes.ts";
 import ViewModel from "../../../models/ViewModel";
 import EditApplicationType from "./EditApplicationType";
 
@@ -34,7 +34,7 @@ export default function ListTestTypes():JSX.Element {
     };
   }, [api.applicationTypes]);
 
-  const handleItemClick = ({ event, props, data }:{event: React.MouseEvent<HTMLElement>;    props: { row: IApplicationType };    data:string}) => {
+  const handleItemClick = ({ event, props, data }:{event: React.MouseEvent<HTMLElement>;    props: { row: IListApplicationType };    data:string}) => {
     switch (data) {
       case "editApplictionType":
         setModalComponent(
@@ -65,7 +65,7 @@ export default function ListTestTypes():JSX.Element {
       );
     });
   };
-  const renderRow = (row:IApplicationType) => {
+  const renderRow = (row:IListApplicationType) => {
     // On right-click, prevent the default menu and show our custom menu
     const handleContextMenu = (e: React.MouseEvent<HTMLTableRowElement>) => {
       // Make sure event is defined
@@ -94,7 +94,7 @@ export default function ListTestTypes():JSX.Element {
   };
   return (
     <>
-      <GenericList<IApplicationType>
+      <GenericList<IListApplicationType>
         title="Manage Appliction Types"
         showAddButton={false}
         createModalType={EnType.View}        

@@ -16,12 +16,12 @@ export interface IPerson {
 
 
 
-export interface Ipeople{
+export interface IListPeople{
     success:boolean,
     people:IPerson[],
 }
 
-export const peopleData:Ipeople=
+export const listPeopleData:IListPeople=
   {
     "success": true,
     "people": [

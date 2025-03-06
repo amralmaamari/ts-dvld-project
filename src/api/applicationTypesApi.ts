@@ -1,11 +1,11 @@
 import { AxiosResponse } from "axios";
 import apiClient from "../context/apiConfig"; // Import the configured Axios client
-import { IApplicationType } from "../data/applicationTypes";
+import { IListApplicationType } from "../data/listApplicationTypes";
 
 // Response when fetching a single test type
 export interface IApplicationTypeResponse {
   success: boolean;
-  applicationType: IApplicationType;
+  applicationType: IListApplicationType;
 }
 
 // Response when fetching multiple test types
@@ -20,13 +20,13 @@ export interface IDeleteResponse {
 const applicationTypesApi = {
   //   fetchAll: (page, pageSize) =>
   //     apiClient.get(`/?page=${page}&results=${pageSize}`),
-  fetchAll: () => apiClient.get(`52c046f2-59a9-48d4-8804-f01e810d7233`),
+  fetchAll: () => apiClient.get(`af155916-9b5b-46c4-9363-951cd1762adb`),
   fetchById: (applicationTypeId:number): Promise<AxiosResponse<IApplicationTypeResponse>> =>
     apiClient.get<IApplicationTypeResponse>(`/applicationtype/${applicationTypeId}`),
 
-  create: (data:IApplicationType): Promise<AxiosResponse<IApplicationTypeResponse>> => apiClient.post<IApplicationTypeResponse>("/applicationtype", data),
+  create: (data:IListApplicationType): Promise<AxiosResponse<IApplicationTypeResponse>> => apiClient.post<IApplicationTypeResponse>("/applicationtype", data),
 
-  update: (applicationTypeId:number, data:IApplicationType):Promise<AxiosResponse<IApplicationTypeResponse>> =>
+  update: (applicationTypeId:number, data:IListApplicationType):Promise<AxiosResponse<IApplicationTypeResponse>> =>
     apiClient.put<IApplicationTypeResponse>(`/applicationtype/${applicationTypeId}`, data),
 
   delete: (applicationTypeId:number):Promise<AxiosResponse<IDeleteResponse>> =>

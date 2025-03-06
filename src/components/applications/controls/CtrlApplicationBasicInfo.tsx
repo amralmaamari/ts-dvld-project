@@ -1,85 +1,17 @@
-import { JSX, useEffect, useState } from "react";
+import { JSX } from "react";
 import { usersIcons } from "../../../assets/assets";
-import { applicationsActions } from "../../../lib/actions";
-import LabelWithIcon from "../../LabelWithIcon";
-import ViewModel from "../../Models/ViewModel";
-import CtrlPersonCard from "../../People/Controls/CtrlPersonCard";
-import DateUtils from "../../../utils/DateUtils";
+import TitleWithIcon from "../../ui/TitleWithIcon";
+import { IApplicationBasicInfo } from "../../../data/applicationsInfo";
+import { IApplicationDetailItemProps, ILable } from "../../../interfaces/constant";
 
-interface ICtrlApplicationBasicInfoProps{
-  applicationID:number;
+interface ICtrlApplicationBasicInfoProps {
+  applicationData: IApplicationBasicInfo | null;
 }
-export default function CtrlApplicationBasicInfo({ applicationID }:ICtrlApplicationBasicInfoProps):JSX.Element {
-  const DEFAULT_VALUE = "[????]";
-  const [selectedApplication, setSelectedApplication] = useState(null);
-  const applicationStatus = JSON.parse(import.meta.env.VITE_APPLICATION_STATUS);
 
-  const initialApplicationDetails = {
-    id: DEFAULT_VALUE,
-    status: DEFAULT_VALUE,
-    fees: DEFAULT_VALUE,
-    type: DEFAULT_VALUE,
-    applicant: DEFAULT_VALUE,
-    date: DEFAULT_VALUE,
-    status_date: DEFAULT_VALUE,
-    created_by: DEFAULT_VALUE,
-    personID: null,
-  };
-
-  const [applicationDetails, setApplicationDetails] = useState(
-    initialApplicationDetails
-  );
-
-  const loadApplicationInfo = async () => {
-    try {
-      if (!applicationID) {
-        throw new Error("No identifier provided.");
-      }
-
-      const data = await applicationsActions.fetchApplicationById(
-        applicationID
-      );
-
-      if (!data) {
-        throw new Error("Person not found.");
-      }
-
-      setSelectedApplication(data);
-    } catch (err) {
-      console.error("Error loading application info:", err.message);
-      setSelectedApplication(null);
-    }
-  };
-
-  useEffect(() => {
-    if (selectedApplication) {
-      setApplicationDetails({
-        id: selectedApplication.ApplicationID || DEFAULT_VALUE,
-        status:
-          applicationStatus[selectedApplication.ApplicationStatus] ||
-          DEFAULT_VALUE,
-
-        fees: selectedApplication.PaidFees || DEFAULT_VALUE,
-        type: selectedApplication.ApplicationTypeTitle || DEFAULT_VALUE,
-        applicant: selectedApplication.ApplicantName || DEFAULT_VALUE,
-        date:
-          DateUtils.formatDate(selectedApplication.ApplicationDate) ||
-          DEFAULT_VALUE,
-        status_date:
-          DateUtils.formatDate(selectedApplication.LastStatusDate) ||
-          DEFAULT_VALUE,
-        created_by: selectedApplication.UserName || DEFAULT_VALUE,
-        personID: selectedApplication.PersonID || DEFAULT_VALUE,
-      });
-    } else {
-      setApplicationDetails(initialApplicationDetails); // ✅ Use pre-defined default object
-    }
-  }, [selectedApplication]); // ✅ Dependency corrected
-
-  useEffect(() => {
-    if (!applicationID) return;
-    loadApplicationInfo();
-  }, [applicationID]);
+export default function CtrlApplicationBasicInfo({ applicationData }: ICtrlApplicationBasicInfoProps): JSX.Element {
+  if (!applicationData) {
+    return <h2>Loading application details...</h2>;
+  }
 
   return (
     <div>
@@ -92,41 +24,34 @@ export default function CtrlApplicationBasicInfo({ applicationID }:ICtrlApplicat
           {applicationDetailsArray.map((detail, index) => (
             <ApplicationDetailItem
               key={index}
-              label={detail.label}
-              value={applicationDetails[detail.key]}
+              title={detail.label}
+              value={applicationData[detail.key as keyof IApplicationBasicInfo] ?? "N/A"}
               icon={detail.icon}
             />
           ))}
         </div>
-        {/* Link */}
-        {selectedApplication && (
-          <ViewModel
-            Form={<CtrlPersonCard personId={3} />}
-            type="View"
-            viewModelEnabled={true}
-          />
-        )}
       </fieldset>
     </div>
   );
 }
 
-function ApplicationDetailItem({ label, value, icon }) {
+function ApplicationDetailItem({ title, value, icon }: IApplicationDetailItemProps): JSX.Element {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <LabelWithIcon label={label} icon={icon} />
+      <TitleWithIcon title={title} icon={icon} />
       <span className="font-semibold text-red-800">{value}</span>
     </div>
   );
 }
 
-export const applicationDetailsArray = [
-  { key: "id", label: "ID:", icon: usersIcons.User322 },
-  { key: "status", label: "Status:", icon: usersIcons.User322 },
-  { key: "fees", label: "Fees:", icon: usersIcons.User322 },
-  { key: "type", label: "Type:", icon: usersIcons.User322 },
-  { key: "applicant", label: "Applicant:", icon: usersIcons.User322 },
-  { key: "date", label: "Date:", icon: usersIcons.User322 },
-  { key: "status_date", label: "Status Date:", icon: usersIcons.User322 },
-  { key: "created_by", label: "Created By:", icon: usersIcons.User322 },
+// ✅ Application Details Array
+export const applicationDetailsArray: ILable[] = [
+  { key: "ApplicationID", label: "ID:", icon: usersIcons.User322 },
+  { key: "ApplicationStatus", label: "Status:", icon: usersIcons.User322 },
+  { key: "PaidFees", label: "Fees:", icon: usersIcons.User322 },
+  { key: "ApplicationTypeTitle", label: "Type:", icon: usersIcons.User322 },
+  { key: "ApplicantName", label: "Applicant:", icon: usersIcons.User322 },
+  { key: "ApplicationDate", label: "Date:", icon: usersIcons.User322 },
+  { key: "LastStatusDate", label: "Status Date:", icon: usersIcons.User322 },
+  { key: "UserName", label: "Created By:", icon: usersIcons.User322 },
 ];

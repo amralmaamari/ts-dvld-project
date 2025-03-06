@@ -1,7 +1,7 @@
 import React, { createContext, useState, useMemo, ReactNode } from "react";
 import peopleApi, { IPersonResponse, IPeopleResponse, DeleteResponse } from "../api/peopleApi";
-import { IPerson } from "../data/people";
-import { ITestTypesResponses } from "../data/testTypes";
+import { IPerson } from "../data/listPeople";
+import { IListTestTypesResponses } from "../data/listTestTypes";
 import testTypeApi, { ITestTypeResponses } from "../api/testTypesApi";
 import applicationTypesApi,{  IApplicationTypeResponses } from "../api/applicationTypesApi";
 import { IApplicationResponses } from "../api/applicationsApi";
@@ -89,8 +89,8 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({ children }) =>
           handleApiCall<DeleteResponse>(peopleApi.delete, id),
       },
       testTypes: {
-        fetchAll: (): Promise<ITestTypesResponses> =>
-          handleApiCall<ITestTypesResponses>(testTypeApi.fetchAll).then(
+        fetchAll: (): Promise<IListTestTypesResponses> =>
+          handleApiCall<IListTestTypesResponses>(testTypeApi.fetchAll).then(
             (data) => data
           ),
       },      

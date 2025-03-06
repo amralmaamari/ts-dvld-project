@@ -262,6 +262,8 @@ export const applicationIcons:Icon[] = [
   { id: "NewApplication64", image: NewApplication64 },
 ];
 
+
+
 export const drivingLicenseIcons:Icon[] = [
   { id: "DamagedDrivingLicense32", image: DamagedDrivingLicense32 },
   { id: "DetainedDrivingLicense32", image: DetainedDrivingLicense32 },

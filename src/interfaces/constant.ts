@@ -16,6 +16,10 @@
   success:boolean,
   data: object[];
   }
+  export enum EnMode{
+    Create = "Create",
+    Update = "Update",
+  }
 
   export enum EnType {
     Create = "Create",
@@ -44,3 +48,12 @@
     pattern?:string,
     min?:number,
   }
+
+  export interface ILable{
+    key:string;
+    label:string;
+    icon:string;
+  }
+
+  export interface IApplicationDetailItemProps{
+    title:string; value:string; icon:string;}

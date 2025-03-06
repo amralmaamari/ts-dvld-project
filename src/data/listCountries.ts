@@ -1,9 +1,9 @@
-export interface ICountry{
+export interface IListCountry{
     id:number,
     country:string,
 } 
 
-export const CountriesData:ICountry[] = [
+export const ListCountriesData:IListCountry[] = [
     { id: 1, country: "Afghanistan" },
     { id: 2, country: "Albania" },
     { id: 3, country: "Algeria" },

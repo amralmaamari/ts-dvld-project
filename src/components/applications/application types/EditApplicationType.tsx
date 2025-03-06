@@ -1,11 +1,11 @@
 import { JSX, useEffect, useState } from "react";
 import InputField from "../../ui/InputField.js";
 import { IField } from "../../../interfaces/constant.js";
-import { IApplicationType } from "../../../data/applicationTypes.js";
+import { IListApplicationType } from "../../../data/listApplicationTypes.js";
 import { applicationTypeActions } from "../../../lib/actions.js";
 
 interface IApplicationTypeFields{
-  values:IApplicationType,
+  values:IListApplicationType,
   onChange: (field: keyof IApplicationTypeFields, value: string) => void;
 }
 
@@ -39,7 +39,7 @@ function ApplicationTypeFields({ values, onChange }:IApplicationTypeFields):JSX.
           label={field.name}        
           key={field.name}
           {...field}
-          value={values[field.name as keyof IApplicationType] || ""}
+          value={values[field.name as keyof IListApplicationType] || ""}
           onChange={(e) => onChange(field.name as keyof IApplicationTypeFields, e.target.value)}
         />
       ))}
@@ -53,7 +53,7 @@ interface IEditApplicationTypeProps{
 
 export default function EditApplicationType({ applicationTypeID }:IEditApplicationTypeProps):JSX.Element {
   const DEFAULT_VALUE = "";
-  const [values, setValues] = useState<IApplicationType>({
+  const [values, setValues] = useState<IListApplicationType>({
     ApplicationTypeID: -1,
     ApplicationTypeTitle: DEFAULT_VALUE,
     ApplicationFees: -1,
@@ -97,7 +97,7 @@ export default function EditApplicationType({ applicationTypeID }:IEditApplicati
     );
   };
 
-  const handleChange = (field: keyof IApplicationType, value:string) => {
+  const handleChange = (field: keyof IListApplicationType, value:string) => {
     setValues((prev) => ({
       ...prev,
       [field]: value,

@@ -1,10 +1,10 @@
 import React, { JSX, useEffect, useState } from "react";
 import InputField from "../../ui/InputField.js";
 import { testTypeActions } from "../../../lib/actions.js";
-import { ITestTypeRow } from "../../../data/testTypes.js";
+import { IListTestTypeRow } from "../../../data/listTestTypes.js";
 
 interface ITestTypeFields{
-  values:ITestTypeRow;
+  values:IListTestTypeRow;
   onChange:(field: keyof ITestTypeFields, value:string)=>void;
 }
 function TestTypeFields({ values, onChange }:ITestTypeFields) {
@@ -45,7 +45,7 @@ function TestTypeFields({ values, onChange }:ITestTypeFields) {
         <InputField
           key={field.name}
           {...field}
-          value={values[field.name as keyof ITestTypeRow] }
+          value={values[field.name as keyof IListTestTypeRow] }
           onChange={(e) => onChange(field.name  as keyof ITestTypeFields, e.target.value)}
         />
       ))}
@@ -98,7 +98,7 @@ export default function EditTestType({ testTypeID }:IEditTestTypeProps):JSX.Elem
     alert(`Data Submitted Successfully. TestTypeID: ${values.TestTypeID}`);
   };
 
-  const handleChange = (field: keyof ITestTypeRow, value:string) => {
+  const handleChange = (field: keyof IListTestTypeRow, value:string) => {
     setValues((prev) => ({
       ...prev,
       [field]: value,

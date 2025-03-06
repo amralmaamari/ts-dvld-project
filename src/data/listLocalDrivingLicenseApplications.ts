@@ -1,4 +1,4 @@
-export interface ILocalDrivingLicenseApplications {
+export interface IListLocalDrivingLicenseApplications {
   LocalDrivingLicenseApplicationID: number;
   ClassName: string;
   NationalNo: number |string;
@@ -8,12 +8,12 @@ export interface ILocalDrivingLicenseApplications {
   Status: string;
 }
 
-export interface ILocalDrivingLicenseApplicationsResponse {
+export interface IListLocalDrivingLicenseApplicationsResponse {
     success:boolean,
-    localdrivinglicenseapplications:ILocalDrivingLicenseApplications[],
+    localdrivinglicenseapplications:IListLocalDrivingLicenseApplications[],
 }
 
-export const LocalDrivingLicenseApplicationsData:ILocalDrivingLicenseApplicationsResponse = {
+export const ListLocalDrivingLicenseApplicationsData:IListLocalDrivingLicenseApplicationsResponse = {
   "success": true,
   "localdrivinglicenseapplications": [
     {

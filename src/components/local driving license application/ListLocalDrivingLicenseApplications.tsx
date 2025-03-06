@@ -13,13 +13,16 @@ import {
 import "react-contexify/dist/ReactContexify.css";
 import ViewModel from "../../models/ViewModel";
 import { EnType, IColumn, IContextMenu, ISearchOptions } from "../../interfaces/constant";
-import { ILocalDrivingLicenseApplications } from "../../data/localDrivingLicenseApplications";
+import { IListLocalDrivingLicenseApplications } from "../../data/listLocalDrivingLicenseApplications";
 import AlertDialog from "../../models/AlertDialog";
+import CtrlApplicationBasicInfo from "../applications/controls/CtrlApplicationBasicInfo";
+import AddUpdateLocalDrivingLicenseApplication from "./AddUpdateLocalDrivingLicenseApplication";
+import DeleteModal from "../../models/DeleteModal";
 
 // Unique identifier for the context menu
 const MENU_ID = "table_row_menu";
 
-const getDisabledState = (row:ILocalDrivingLicenseApplications, key:string) => {
+const getDisabledState = (row:IListLocalDrivingLicenseApplications, key:string) => {
   const  TotalPassedTests =parseInt(row.PassedTestCount); // number
   // In C#: LicenseExists = LocalDrivingLicenseApplication.IsLicenseIssued()
   // Here, we assume that if status is "New", then no license exists.
@@ -213,32 +216,36 @@ function ListLocalDrivingLicenseApplications() {
   };
 
 
-  const handleItemClick = ({ event, props, data }:{event: React.MouseEvent<HTMLElement>;    props: { row: ILocalDrivingLicenseApplications };    data:string}) => {    console.log("Menu item clicked:", data);
+  const handleItemClick = ({ event, props, data }:{event: React.MouseEvent<HTMLElement>;    props: { row: IListLocalDrivingLicenseApplications };    data:string}) => {    console.log("Menu item clicked:", data);
     // Here you can implement action based on the clicked key,
     // for example: if (data === "deleteApplication") { ... }
     switch (data) {
       case "showApplicationDetails":
         ShowMenu({
           setModalComponent,
-          component:<CtrlDrivingLicenseApplicationInfo applicationID={110} />
+          component:<CtrlDrivingLicenseApplicationInfo  localDrivingLicenseApplicationID={3068
+          }  />
         });
 
         break;
       case "editApplication":
         ShowMenu({
           setModalComponent,
-          component:<h1>aaaaaaaaaaaaaaa</h1>
-          // <AddUpdateLocalDrivingLicenseApplication
-          //   localDrivingLicenseApplicationID={
-          //     props.row.LocalDrivingLicenseApplicationID
-          //   }
-          // />          
+          component:
+          <AddUpdateLocalDrivingLicenseApplication
+          localDrivingLicenseApplicationID={
+              props.row.LocalDrivingLicenseApplicationID
+            }
+          />          
         });
 
         break;        
         case "cancelApplication":          
           <AlertDialog message="Want u to Cancle Application" onClose={()=>alert("Cancle")} onSubmit={()=>alert("Submit")}  />
         break;
+        case "deleteApplication":
+          alert("Want to delete ?")  
+          break;
     }
   };
   const fetchDataFn = useCallback(async () => {
@@ -251,7 +258,7 @@ function ListLocalDrivingLicenseApplications() {
     };
   }, [api.localDrivingLicenseApplications]);
 
-  const renderRow = (row:ILocalDrivingLicenseApplications):JSX.Element => {
+  const renderRow = (row:IListLocalDrivingLicenseApplications):JSX.Element => {
     // On right-click, prevent the default menu and show our custom menu
     const handleContextMenu = (e:React.MouseEvent<HTMLTableRowElement>) => {
       // Make sure event is defined
@@ -269,10 +276,10 @@ function ListLocalDrivingLicenseApplications() {
         className=" even:bg-slate-400 odd:bg-slate-100 text-1xl hover:bg-slate-500 transition"
       >
         <td className="py-2 px-6">{row.LocalDrivingLicenseApplicationID}</td>
-        <td className="py-2 px-6">{row.ClassName}</td>
+        <td className="py-2 px-6 whitespace-nowrap">{row.ClassName}</td>
         <td className="py-2 px-6">{row.NationalNo}</td>
-        <td className="py-2 px-6">{row.FullName}</td>
-        <td className="py-2 px-6 hidden md:table-cell">
+        <td className="py-2 px-6 whitespace-nowrap">{row.FullName}</td>
+        <td className="py-2 px-6 hidden md:table-cell ">
           {row.ApplicationDate}
         </td>
         <td className="py-2 px-6">{row.PassedTestCount}</td>
