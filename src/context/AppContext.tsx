@@ -6,6 +6,7 @@ import testTypeApi, { ITestTypeResponses } from "../api/testTypesApi";
 import applicationTypesApi,{  IApplicationTypeResponses } from "../api/applicationTypesApi";
 import { IApplicationResponses } from "../api/applicationsApi";
 import localDrivingLicenseApplicationsApi, {  ILocalDrivingLicenseApplicationResponses } from "../api/localDrivingLicenseApplicationsApi";
+import usersApi,{ IUsersResponses } from "../api/usersApi";
 
 // Define the shape of our Context
 interface IAppContext {
@@ -27,6 +28,10 @@ interface IAppContext {
     }
     localDrivingLicenseApplications:{
       fetchAll: () => Promise<ILocalDrivingLicenseApplicationResponses>;
+
+    }
+    users:{
+      fetchAll: () => Promise<IUsersResponses>;
 
     }
   };
@@ -103,6 +108,12 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({ children }) =>
       localDrivingLicenseApplications:{
         fetchAll: (): Promise<ILocalDrivingLicenseApplicationResponses> =>
           handleApiCall<ILocalDrivingLicenseApplicationResponses>(localDrivingLicenseApplicationsApi.fetchAll).then(
+            (data) => data
+          ),
+      },
+      users:{
+        fetchAll: (): Promise<IUsersResponses> =>
+          handleApiCall<IUsersResponses>(usersApi.fetchAll).then(
             (data) => data
           ),
       }

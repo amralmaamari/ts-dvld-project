@@ -8,20 +8,22 @@ import ReactTabsComponent from "../ui/ReactTabsComponent";
 import { ListLicenseClassesData } from "../../data/listLicenseClasses";
 import { ListApplicationTypesData } from "../../data/listApplicationTypes";
 import { IPerson } from "../../data/listPeople";
+import { EnMode } from "../../interfaces/constant";
+import DateUtils from "../../utils/DateUtils";
 
 // --------------------
 // 🌟 1️⃣ Context and Reducer Definitions
 // --------------------
 
 // Define the initial structure of the form state
-interface IFormState {
+interface IValues {
   personInfo: IPerson | undefined;
   applicationId: number | string;
   applicationDate: string;
   licenseClass: number;
   applicationFees: number;
   createdBy: string;
-  mode: "Update" | "Create";
+  mode: EnMode;
   onClose: (() => void) | null;
   isPersonSelected?: boolean;
   [key: string]: any; // Allow dynamic fields
@@ -36,7 +38,7 @@ type IAction =
 
 // Define the context interface
 interface IFormContext {
-  state: IFormState;
+  state: IValues;
   dispatch: React.Dispatch<IAction>;
 }
 
@@ -64,12 +66,13 @@ export default function AddUpdateLocalDrivingLicenseApplication({
   localDrivingLicenseApplicationID,
 }: IAddUpdateLocalDrivingLicenseApplicationProps): JSX.Element {
   
-  const initialState = getInitialState(localDrivingLicenseApplicationID);
-  const [state, dispatch] = useReducer(formReducer, initialState);
-
   useEffect(() => {
     console.log("Fetching data for LocalDrivingLicenseApplicationID:", localDrivingLicenseApplicationID);
   }, [localDrivingLicenseApplicationID]);
+  const initialState = getInitialState(localDrivingLicenseApplicationID);
+  const [state, dispatch] = useReducer(formReducer, initialState);
+
+
 
   return (
     <FormContext.Provider value={{ state, dispatch }}>
@@ -83,11 +86,11 @@ export default function AddUpdateLocalDrivingLicenseApplication({
 // --------------------
 
 // Generate Initial State
-function getInitialState(localDrivingLicenseApplicationID?: number): IFormState {
+function getInitialState(localDrivingLicenseApplicationID?: number): IValues {
   return {
     personInfo: undefined,
     applicationId: localDrivingLicenseApplicationID || "[????]",
-    applicationDate: formatDate(new Date()),
+    applicationDate: DateUtils.formatDate(new Date()) ,
     licenseClass: 3,
     applicationFees: ListApplicationTypesData.applicationTypes[0].ApplicationFees,
     createdBy: "Amr7022",
@@ -97,12 +100,12 @@ function getInitialState(localDrivingLicenseApplicationID?: number): IFormState 
 }
 
 // Reducer Function
-function formReducer(state: IFormState, action: IAction): IFormState {
+function formReducer(state: IValues, action: IAction): IValues {
   switch (action.type) {
     case "SET_PERSON":
       return { ...state, personInfo: action.payload, isPersonSelected: true };
     case "UPDATE_APPLICATION":
-      return { ...state, applicationId: action.payload, mode: "Update" };
+      return { ...state, applicationId: action.payload, mode: EnMode.Update };
     case "UPDATE_FIELD":
       return { ...state, [action.field]: action.value };
     case "RESET_FORM":
@@ -113,25 +116,15 @@ function formReducer(state: IFormState, action: IAction): IFormState {
   }
 }
 
-// Format Date Helper Function
-function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
 
 // --------------------
 // 🌟 4️⃣ UI Components
 // --------------------
 
 // Tabs Component
-interface ILicenseApplicationTabsProps {
-  mode: "Update" | "Create";
-}
 
-function LicenseApplicationTabs({ mode }: ILicenseApplicationTabsProps): JSX.Element {
+
+function LicenseApplicationTabs({ mode }: EnMode): JSX.Element {
   const tabsConfig = [
     { id: 1, label: "Person", component: <PersonSelection /> },
     { id: 2, label: "Application", component: <ApplicationDetails /> },

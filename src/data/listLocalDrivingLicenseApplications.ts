@@ -8,12 +8,12 @@ export interface IListLocalDrivingLicenseApplications {
   Status: string;
 }
 
-export interface IListLocalDrivingLicenseApplicationsResponse {
+export interface IListLocalDrivingLicenseApplicationsResponses {
     success:boolean,
     localdrivinglicenseapplications:IListLocalDrivingLicenseApplications[],
 }
 
-export const ListLocalDrivingLicenseApplicationsData:IListLocalDrivingLicenseApplicationsResponse = {
+export const ListLocalDrivingLicenseApplicationsData:IListLocalDrivingLicenseApplicationsResponses = {
   "success": true,
   "localdrivinglicenseapplications": [
     {

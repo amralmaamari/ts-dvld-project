@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function PeopleList():JSX.Element {
+function ListPeople():JSX.Element {
   const { api } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -77,7 +77,7 @@ function PeopleList():JSX.Element {
             row.SecondName,
             row.ThirdName,
             row.LastName,
-          ].filter(Boolean).join(" ")}</td>
+      ].filter(Boolean).join(" ")}</td>
         <td className="py-2 px-6 bg-white">{row.Gendor}</td>
         <td className="py-2 px-6 bg-white">{row.DateOfBirth}</td>
         <td className="py-2 px-6 bg-white">{row.Nationality}</td>
@@ -96,18 +96,12 @@ function PeopleList():JSX.Element {
   };
 
 
-  const AddNewButton: React.FC = () => {
-    return ( 
-    <button  className="bg-green-400 rounded-md text-white px-3 py-1">
-      Add New Person
-    </button>)
-  }
+
   return (
     <>
       <GenericList<IPerson>
         title="People List"
-        tableName="People"
-        addNewButton={<AddNewButton />}
+        addComponent={<AddUpdatePeople />}
         createModalType={EnType.Create}
         columns={columns}
         searchOptions={searchOptions}
@@ -118,4 +112,4 @@ function PeopleList():JSX.Element {
   );
 }
 
-export default PeopleList;
+export default ListPeople;

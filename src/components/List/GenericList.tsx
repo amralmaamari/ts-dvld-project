@@ -5,22 +5,20 @@ import { AppContext } from "../../context/AppContext";
 import { EnType, IColumn, IDataResponse, ISearchOptions } from "../../interfaces/constant";
 import Pagination from "../ui/Pagination";
 import AddUpdateModal from "../../models/AddUpdateModal";
-import AddUpdatePeople from "../people/AddUpdatePeople";
 interface IGenericListProps<T>{
   title:string,
-  tableName:string,
   showAddButton?:boolean,
   createModalType:EnType,
   columns:IColumn[],
+  addComponent?:JSX.Element;
   searchOptions?:ISearchOptions[],
   renderRow:(row: T)=>JSX.Element|null,
   fetchDataFn:()=>Promise<IDataResponse>,
 }
 function GenericList<T>({
   title,
-  tableName,
   showAddButton=true,
-  createModalType,
+  addComponent,
   columns,
   searchOptions,
   renderRow,
@@ -96,8 +94,8 @@ function GenericList<T>({
                 setCurrentPage={setCurrentPage}
               />
             )}
-          {showAddButton&&
-          <AddUpdateModal type={EnType.Create} children={<AddUpdatePeople />}/>
+          {showAddButton&& addComponent&&
+          <AddUpdateModal type={EnType.Create} children={addComponent}/>
           }
           </div>
           <Table columns={columns} renderRow={renderRow} data={paginatedData} />

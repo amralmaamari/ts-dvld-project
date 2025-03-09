@@ -1,7 +1,7 @@
 import { JSX, useMemo } from 'react';
 import { usersIcons, genderIcons } from '../../../assets/assets';
 import AddUpdateModal from '../../../models/AddUpdateModal';
-import { EnType } from '../../../interfaces/constant';
+import { EnType, ILable } from '../../../interfaces/constant';
 import AddUpdatePeople from '../AddUpdatePeople';
 import TitleWithIcon from '../../ui/TitleWithIcon';
 import { IPerson } from '../../../data/listPeople';
@@ -36,6 +36,7 @@ export interface IPersonDetailItemProps {
 export default function CtrlPersonCard({ personData, showTitle = true }: ICtrlPersonCardProps): JSX.Element {
   const DEFAULT_VALUE = "[????]";
 
+ 
   // ✅ Compute the full name dynamically
   const generateFullName: string = useMemo(() => {
     return (
@@ -49,6 +50,10 @@ export default function CtrlPersonCard({ personData, showTitle = true }: ICtrlPe
         .join(" ") || DEFAULT_VALUE
     );
   }, [personData]);
+  
+  if (!personData) {
+    return <h2 className="text-gray-600">No user data available.</h2>; // ✅ Prevent rendering if null
+  }
 
   // ✅ Construct person details object dynamically
   const personDetails: IPersonDetails = {
@@ -127,15 +132,10 @@ const getDefaultImage = (gender: string): string => {
   return genderIcons.Male512;
 };
 
-// Interface for each detail item in the array
-export interface IPersonDetailArrayItem {
-  key: keyof IPersonDetails;
-  label: string;
-  icon: string;
-}
+
 
 // Array of person details to render dynamically
-const personDetailArray: IPersonDetailArrayItem[] = [
+const personDetailArray: ILable[] = [
   { key: "personID", label: "Person ID:", icon: usersIcons.User322 },
   { key: "fullName", label: "Name:", icon: usersIcons.User322 },
   { key: "nationalNo", label: "National No:", icon: usersIcons.User322 },

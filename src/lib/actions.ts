@@ -3,6 +3,8 @@ import { ListApplicationTypesData } from "../data/listApplicationTypes.ts";
 import { ListTestTypesData } from "../data/listTestTypes.ts";
 import { ApplicationBasicInfoData, IApplicationBasicInfo , IApplicationBasicInfoResponse } from "../data/applicationsInfo.ts";
 import { LocalDrivingLicenseApplicationData, ILocalDrivingLicenseApplication } from "../data/localDrivingLicenseApplication.ts";
+import ListUsers from "../components/user/ListUsers.tsx";
+import { IUsers, ListUsersData } from "../data/listUsers.ts";
 
 
 
@@ -190,7 +192,6 @@ async function fetchDrivingLicenseApplicationInfoById(
     }, 500);
   });
 }
-
 async function fetchDrivingLicenseApplicationInfoByApplicationId(
   applicationID: number
 ): Promise<ILocalDrivingLicenseApplication> {
@@ -207,11 +208,28 @@ async function fetchDrivingLicenseApplicationInfoByApplicationId(
     }, 500);
   });
 }
-
-
 export const drivingLicenseApplicationInfoActions = {
   fetchDrivingLicenseApplicationInfoById,
   fetchDrivingLicenseApplicationInfoByApplicationId,
 };
 
 // End Getting DrivingLicenseApplicationInfo
+
+async function fetchUserInfoById(
+  usersID: number
+): Promise<IUsers> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = ListUsersData.users.find((p: IUsers) => p.UserID === usersID);
+
+      if(data){
+        return resolve(data);
+      }
+      return reject(null);
+    }, 500);
+  });
+}
+
+export const usersActions={
+  fetchUserInfoById,
+}
