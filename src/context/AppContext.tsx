@@ -7,6 +7,8 @@ import applicationTypesApi,{  IApplicationTypeResponses } from "../api/applicati
 import { IApplicationResponses } from "../api/applicationsApi";
 import localDrivingLicenseApplicationsApi, {  ILocalDrivingLicenseApplicationResponses } from "../api/localDrivingLicenseApplicationsApi";
 import usersApi,{ IUsersResponses } from "../api/usersApi";
+import { IDetainedLicenses } from "../data/listDetainedLicenses";
+import detainedLicensesApi, {  IDetaintedLicensesResponses } from "../api/detaintedLicensesApi";
 
 // Define the shape of our Context
 interface IAppContext {
@@ -32,6 +34,10 @@ interface IAppContext {
     }
     users:{
       fetchAll: () => Promise<IUsersResponses>;
+
+    }
+    detaintedLicenses:{
+      fetchAll: () => Promise<IDetaintedLicensesResponses>;
 
     }
   };
@@ -116,7 +122,13 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({ children }) =>
           handleApiCall<IUsersResponses>(usersApi.fetchAll).then(
             (data) => data
           ),
-      }
+      },
+      detaintedLicenses:{
+        fetchAll: (): Promise<IDetaintedLicensesResponses> =>
+          handleApiCall<IDetaintedLicensesResponses>(detainedLicensesApi.fetchAll).then(
+            (data) => data
+          ),
+      },
       
     }),
     []

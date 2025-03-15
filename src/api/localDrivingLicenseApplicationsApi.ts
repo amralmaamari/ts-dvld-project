@@ -21,7 +21,7 @@ export interface IDeleteResponse {
 const localDrivingLicenseApplicationsApi = {
   //   fetchAll: (page, pageSize) =>
   //     apiClient.get(`/?page=${page}&results=${pageSize}`),
-  fetchAll: () => apiClient.get(`f972d8f6-7e27-4c3b-9580-c08a72e2c537`),
+  fetchAll: () => apiClient.get(`a455948d-0249-4c60-978b-ae9ada64533b`),
   fetchById: (personId:number): Promise<AxiosResponse<ILocalDrivingLicenseApplicationResponse>> => apiClient.get<ILocalDrivingLicenseApplicationResponse>(`/local-application/${personId}`),
 
   create: (data:ILocalDrivingLicenseApplicationResponse): Promise<AxiosResponse<ILocalDrivingLicenseApplicationResponse>> => apiClient.post<ILocalDrivingLicenseApplicationResponse>("/local-application", data),

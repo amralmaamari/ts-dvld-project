@@ -10,6 +10,7 @@ import ListLocalDrivingLicenseApplications from './components/local driving lice
 // import CtrlPersonCardWithFilter from './components/people/controls/CtrlPersonCardWithFilter';
 import AddUpdateLocalDrivingLicenseApplication from './components/local driving license application/AddUpdateLocalDrivingLicenseApplication';
 import ListUsers from './components/user/ListUsers';
+import ListDetaintedLicenses from './components/licenses/detain license/ListDetaintedLicenses';
 
 function App() {
 
@@ -32,6 +33,10 @@ function App() {
                 path="/applications/manage/local"
                 element={<ListLocalDrivingLicenseApplications  />}
               /> 
+              <Route
+                path="/applications/detain/manage"
+                element={<ListDetaintedLicenses />}
+              />
               <Route
                 path="/applications/manage-test-types"
                 element={<ListTestTypes />}
